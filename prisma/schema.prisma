@@ -9,3 +9,19 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum ToDoStatus {
+  DONE
+  UNDONE
+}
+
+model ToDo {
+  id        String   @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  title    String @unique
+  priority Int
+
+  status ToDoStatus @default(UNDONE)
+}
