@@ -55,7 +55,9 @@ export class TodosService {
   }
 
   private async findOne(id: string): Promise<void> {
-    const toDo = await this.prismaService.toDo.findUnique({ where: { id } });
+    const toDo = await this.prismaService.toDo.findUnique({
+      where: { id },
+    });
 
     if (!toDo) {
       throw new NotFoundException('Todo is not found');
