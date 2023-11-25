@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { envSchema } from './schemas/env.schema';
-import { TodosModule } from 'src/todos/todos.module';
+import { TasksModule } from 'src/Tasks/Tasks.module';
 
 @Module({
   imports: [
@@ -9,7 +9,7 @@ import { TodosModule } from 'src/todos/todos.module';
       isGlobal: true,
       validationSchema: envSchema,
     }),
-    TodosModule,
+    TasksModule,
   ],
   controllers: [],
   providers: [],

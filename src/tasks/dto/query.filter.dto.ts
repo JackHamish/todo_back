@@ -1,4 +1,4 @@
-import { ToDoStatus } from '@prisma/client';
+import { TaskStatus } from '@prisma/client';
 import { IsEnum, IsOptional, IsString } from 'class-validator';
 
 export class QueryFilterDto {
@@ -15,6 +15,6 @@ export class QueryFilterDto {
   public title?: string;
 
   @IsOptional()
-  @IsEnum(ToDoStatus)
-  status: ToDoStatus;
+  @IsEnum(TaskStatus)
+  status: TaskStatus;
 }

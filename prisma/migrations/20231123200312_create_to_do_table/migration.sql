@@ -1,17 +1,17 @@
 -- CreateEnum
-CREATE TYPE "ToDoStatus" AS ENUM ('DONE', 'UNDONE');
+CREATE TYPE "TaskStatus" AS ENUM ('DONE', 'UNDONE');
 
 -- CreateTable
-CREATE TABLE "ToDo" (
+CREATE TABLE "Task" (
     "id" UUID NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
     "title" TEXT NOT NULL,
     "priority" INTEGER NOT NULL,
-    "status" "ToDoStatus" NOT NULL DEFAULT 'UNDONE',
+    "status" "TaskStatus" NOT NULL DEFAULT 'UNDONE',
 
-    CONSTRAINT "ToDo_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Task_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "ToDo_title_key" ON "ToDo"("title");
+CREATE UNIQUE INDEX "Task_title_key" ON "Task"("title");

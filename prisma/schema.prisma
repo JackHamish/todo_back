@@ -10,12 +10,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum ToDoStatus {
+enum TaskStatus {
   DONE
   UNDONE
 }
 
-model ToDo {
+model Task {
   id        String   @id @default(uuid()) @db.Uuid
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -23,5 +23,5 @@ model ToDo {
   title    String @unique
   priority Int
 
-  status ToDoStatus @default(UNDONE)
+  status TaskStatus @default(UNDONE)
 }
