@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -10,6 +14,14 @@ export class TasksService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async create(createTaskDto: CreateTaskDto): Promise<Task> {
+    const duplicate = await this.prismaService.task.findUnique({
+      where: { title: createTaskDto.title },
+    });
+
+    if (duplicate) {
+      throw new BadRequestException('Task with this title already exist');
+    }
+
     return await this.prismaService.task.create({ data: createTaskDto });
   }
 
@@ -23,8 +35,6 @@ export class TasksService {
     }
 
     if (queryFilter.title) {
-      console.log(queryFilter.title);
-
       options.where = {
         title: {
           startsWith: queryFilter.title,
