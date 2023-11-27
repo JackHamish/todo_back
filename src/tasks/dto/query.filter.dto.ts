@@ -4,15 +4,15 @@ import { IsEnum, IsOptional, IsString } from 'class-validator';
 export class QueryFilterDto {
   @IsString()
   @IsOptional()
-  public sortField?: string;
+  sortField?: string;
 
   @IsString()
   @IsOptional()
-  public sortOrder?: 'ASC' | 'DESC' = 'DESC';
+  sortOrder?: 'ASC' | 'DESC' = 'DESC';
 
   @IsString()
   @IsOptional()
-  public title?: string;
+  title?: string;
 
   @IsOptional()
   @IsEnum(TaskStatus)

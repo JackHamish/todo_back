@@ -37,7 +37,7 @@ export class TasksService {
     if (queryFilter.title) {
       options.where = {
         title: {
-          startsWith: queryFilter.title,
+          contains: queryFilter.title,
         },
       };
     }
@@ -52,7 +52,7 @@ export class TasksService {
   }
 
   async update(id: string, updateTaskDto: UpdateTaskDto): Promise<Task> {
-    await this.findOne(id);
+    await this.ensureTaskExists(id);
 
     return await this.prismaService.task.update({
       where: { id },
@@ -61,12 +61,12 @@ export class TasksService {
   }
 
   async remove(id: string): Promise<Task> {
-    await this.findOne(id);
+    await this.ensureTaskExists(id);
 
     return await this.prismaService.task.delete({ where: { id } });
   }
 
-  private async findOne(id: string): Promise<void> {
+  private async ensureTaskExists(id: string): Promise<void> {
     const task = await this.prismaService.task.findUnique({
       where: { id },
     });
